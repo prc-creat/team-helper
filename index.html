@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>金铲铲阵容助手 - S17</title>
+  <title>金铲铲阵容助手 - S17星神赛季</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       background: #F0F8FF;
       color: #333;
-      min-height: 100vh;
     }
     .header {
       background: linear-gradient(135deg, #87CEEB, #5BA3C6);
@@ -19,8 +18,8 @@
       text-align: center;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
-    .header h1 { font-size: 24px; margin-bottom: 5px; }
-    .header p { font-size: 14px; opacity: 0.9; }
+    .header h1 { font-size: 24px; margin-bottom: 4px; }
+    .header p { font-size: 13px; opacity: 0.9; }
     .nav {
       display: flex;
       background: white;
@@ -29,7 +28,7 @@
     }
     .nav button {
       flex: 1;
-      padding: 14px 8px;
+      padding: 14px 6px;
       border: none;
       background: white;
       color: #666;
@@ -86,12 +85,6 @@
       font-weight: bold;
       margin: 10px 0 6px;
     }
-    .gear-item {
-      padding: 3px 0;
-      font-size: 13px;
-      color: #555;
-    }
-    .gear-item::before { content: '✦ '; color: #87CEEB; }
     .modal {
       display: none;
       position: fixed;
@@ -128,193 +121,220 @@
       color: #999;
       font-size: 11px;
       padding: 16px;
+      line-height: 1.6;
     }
+    .god-pick {
+      background: linear-gradient(135deg, #FFF9E6, #FFF3CC);
+      border: 1px solid #FFE58F;
+      border-radius: 10px;
+      padding: 12px;
+      margin-bottom: 12px;
+    }
+    .god-pick h4 { font-size: 14px; margin-bottom: 6px; color: #B8860B; }
+    .god-pick p { font-size: 12px; color: #666; line-height: 1.6; }
   </style>
 </head>
 <body>
   <div class="header">
     <h1>🏅 金铲铲阵容助手</h1>
-    <p>S17星神赛季</p>
+    <p>S17星神赛季 · 数据来源综合整理</p>
   </div>
 
   <div class="nav">
     <button class="active" onclick="showTab('rank')">🏅 阵容强度</button>
-    <button onclick="showTab('research')">📚 阵容科研</button>
-    <button onclick="showTab('gear')">🛡️ 单卡评级</button>
+    <button onclick="showTab('research')">📚 阵容详情</button>
+    <button onclick="showTab('guide')">💡 选神攻略</button>
   </div>
 
   <div class="content">
     <!-- 阵容强度 -->
     <div id="tab-rank" class="tab-content">
-      <p style="font-size:12px;color:#999;margin-bottom:8px;">点击阵容查看详情</p>
+      <p style="font-size:12px;color:#999;margin-bottom:8px;">点击查看完整攻略</p>
 
-      <div class="card" onclick="showRank('assassin')">
+      <div class="card" onclick="showDetail('kasha')">
         <h3><span class="tier t0">T0</span> 暗星卡莎</h3>
-        <p>核心：卡莎、烬、塔姆、努努、莫甘娜、卡尔玛、铁男、大虫子、丽桑卓</p>
+        <p>版本答案 · 7级追三星卡莎 · 卡莎/烬/塔姆</p>
       </div>
-      <div class="card" onclick="showRank('star')">
-        <h3><span class="tier t0">T0</span> 新星九五</h3>
-        <p>核心：男枪、剑姬、莫甘娜、薇古丝、慎、塔姆、阿卡丽、剑魔、娑娜</p>
-      </div>
-      <div class="card" onclick="showRank('sniper')">
+      <div class="card" onclick="showDetail('sniper')">
         <h3><span class="tier t0">T0</span> 观星九五狙</h3>
-        <p>核心：霞、烬、努努、拉莫斯、卡尔玛、慎、贾克斯、巴德、机器人</p>
+        <p>后期之王 · 霞/烬/努努 · 选阿狸</p>
       </div>
-      <div class="card" onclick="showRank('lb')">
-        <h3><span class="tier t0">T0</span> 重装妖姬</h3>
-        <p>核心：妖姬、努努、卡尔玛、俄洛伊、机器人、娑娜、小木灵、莫甘娜</p>
-      </div>
-      <div class="card" onclick="showRank('veigar')">
+      <div class="card" onclick="showDetail('veigar')">
         <h3><span class="tier t0">T0</span> 木灵小法</h3>
-        <p>核心：小法、库奇、拉莫斯、波比、巴德、卡尔玛、菲兹、小木灵、丽桑卓</p>
+        <p>赌狗快乐阵 · 7木灵复制追三 · 小法/飞机</p>
+      </div>
+      <div class="card" onclick="showDetail('dragon')">
+        <h3><span class="tier t0">T0</span> 重装龙王</h3>
+        <p>17.3加强版 · 龙王/努努/机器人</p>
+      </div>
+      <div class="card" onclick="showDetail('star95')">
+        <h3><span class="tier t0">T0</span> 新星九五</h3>
+        <p>运营天花板 · 男枪/剑姬/薇古丝</p>
       </div>
 
-      <p style="font-size:13px;color:#87CEEB;font-weight:bold;margin:16px 0 8px;">T1 稳定吃分</p>
-      <div class="card" onclick="showRank('berzerk')">
-        <h3><span class="tier t1">T1</span> 狂战特工</h3>
-        <p>核心：易、加里奥、千珏、娑娜、厄加特｜物理爆发，中期强势</p>
+      <p style="font-size:13px;color:#f39c12;font-weight:bold;margin:16px 0 8px;">T1 稳定吃分</p>
+      <div class="card" onclick="showDetail('weigu')">
+        <h3><span class="tier t1">T1</span> 木灵薇古丝95</h3>
+        <p>法系天花板 · 薇古丝双巨杀</p>
       </div>
-      <div class="card" onclick="showRank('huan')">
-        <h3><span class="tier t1">T1</span> 幻灵九五</h3>
-        <p>核心：菲奥娜、阿罗拉、俄洛伊｜幻灵体系，后期转型灵活</p>
-      </div>
-      <div class="card" onclick="showRank('nami')">
-        <h3><span class="tier t1">T1</span> 太空娜美</h3>
-        <p>核心：娜美、奥恩、烬、莎弥拉｜控制+爆发兼备</p>
+      <div class="card" onclick="showDetail('lb')">
+        <h3><span class="tier t1">T1</span> 重装妖姬</h3>
+        <p>赌狗版本答案 · 7级慢D三星妖姬</p>
       </div>
     </div>
 
-    <!-- 阵容科研 -->
+    <!-- 阵容详情 -->
     <div id="tab-research" class="tab-content" style="display:none">
-      <p style="font-size:12px;color:#999;margin-bottom:8px;">点击查看详细攻略</p>
-      <div class="card" onclick="showResearch('assassin')">
+      <p style="font-size:12px;color:#999;margin-bottom:8px;">点击阵容查看详情</p>
+      <div class="card" onclick="showDetail('kasha')">
         <h3><span class="tier t0">T0</span> 暗星卡莎</h3>
-        <p>版本答案，7级追三卡莎锁血</p>
+        <p>6暗星 · 无尽青龙刀卡莎 · 选韦鲁斯</p>
       </div>
-      <div class="card" onclick="showResearch('lb')">
-        <h3><span class="tier t0">T0</span> 重装妖姬</h3>
-        <p>三费赌狗版本答案，7级慢D三星妖姬</p>
-      </div>
-      <div class="card" onclick="showResearch('sniper')">
+      <div class="card" onclick="showDetail('sniper')">
         <h3><span class="tier t0">T0</span> 观星九五狙</h3>
-        <p>公式化上分，冷门稳定</p>
+        <p>3观星3狙神 · 羊刀霞 · 选阿狸</p>
+      </div>
+      <div class="card" onclick="showDetail('veigar')">
+        <h3><span class="tier t0">T0</span> 木灵小法</h3>
+        <p>7木灵复制 · 纳什法爆小法 · 选韦鲁斯</p>
+      </div>
+      <div class="card" onclick="showDetail('dragon')">
+        <h3><span class="tier t0">T0</span> 重装龙王</h3>
+        <p>4重装3神谕 · 帽子法爆龙王 · 选阿狸</p>
+      </div>
+      <div class="card" onclick="showDetail('star95')">
+        <h3><span class="tier t0">T0</span> 新星九五</h3>
+        <p>9人口大成 · 男枪剑姬双C · 选阿狸</p>
+      </div>
+      <div class="card" onclick="showDetail('weigu')">
+        <h3><span class="tier t1">T1</span> 木灵薇古丝95</h3>
+        <p>双巨杀薇古丝 · 艾克/阿狸</p>
+      </div>
+      <div class="card" onclick="showDetail('lb')">
+        <h3><span class="tier t1">T1</span> 重装妖姬</h3>
+        <p>羊刀法爆妖姬 · 7级追三</p>
       </div>
     </div>
 
-    <!-- 单卡评级 -->
-    <div id="tab-gear" class="tab-content" style="display:none">
-      <p style="font-size:12px;color:#999;margin-bottom:8px;">S17赛季英雄强度评级</p>
-      <p style="font-size:13px;color:#e74c3c;font-weight:bold;margin-bottom:6px;">三费卡</p>
-      <div class="card">
-        <h3><span class="tier t0">T0</span> 阿萝拉、卡莎、厄加特</h3>
+    <!-- 选神攻略 -->
+    <div id="tab-guide" class="tab-content" style="display:none">
+      <div class="god-pick">
+        <h4>🦊 阿狸（财富之神）</h4>
+        <p>🌟 <strong>最佳选择</strong> · 稳定经济+全队攻防</p>
+        <p>适用：运营/九五阵容 · 新手无脑选</p>
       </div>
-      <div class="card">
-        <h3><span class="tier t1">T1</span> 奥恩、俄洛伊、茂凯、拉亚斯特、莎弥拉、璐璐</h3>
+      <div class="god-pick">
+        <h4>🏹 韦鲁斯（爱神）</h4>
+        <p>妮蔻+复制器，追三星速度极快</p>
+        <p>适用：赌狗阵容（暗星卡莎、木灵小法）</p>
+      </div>
+      <div class="god-pick">
+        <h4>⚔️ 亚索（深渊之神）</h4>
+        <p>强化格=第四件装备，单体强度爆炸</p>
+        <p>适用：单核阵容</p>
+      </div>
+      <div class="god-pick">
+        <h4>⚡ 凯尔（秩序之神）</h4>
+        <p>成品装升级光明装，C位质变</p>
+        <p>适用：装备阵容</p>
+      </div>
+      <div class="god-pick">
+        <h4>🎯 选神口诀</h4>
+        <p>运营选阿狸</p>
+        <p>赌狗选韦鲁斯</p>
+        <p>单核选亚索</p>
+        <p>装备选凯尔</p>
       </div>
 
-      <p style="font-size:13px;color:#f39c12;font-weight:bold;margin:12px 0 6px;">四费卡</p>
-      <div class="card">
-        <h3><span class="tier t0">T0</span> 加里奥、塔姆、霞</h3>
-      </div>
-      <div class="card">
-        <h3><span class="tier t1">T1</span> 索尔、库奇、乐芙兰、努努、锐雯、千珏</h3>
-      </div>
-
-      <p style="font-size:13px;color:#9b59b6;font-weight:bold;margin:12px 0 6px;">五费卡</p>
-      <div class="card">
-        <h3><span class="tier t0">T0</span> 劫（天煞）、菲奥娜（剑姬）、薇古丝</h3>
-      </div>
-      <div class="card">
-        <h3><span class="tier t1">T1</span> 烬、娑娜、巴德、莫甘娜、慎</h3>
+      <div class="card" style="cursor:default">
+        <h3>💡 S17上分建议</h3>
+        <p style="font-size:13px;color:#555;line-height:1.8;margin-top:8px;">
+        🔹 新手推荐：暗星卡莎 / 观星九五狙<br>
+        🔹 老手推荐：新星九五 / 木灵薇古丝95<br>
+        🔹 赌狗推荐：重装妖姬 / 木灵小法<br>
+        🔹 稳健上分：重装龙王
+        </p>
       </div>
     </div>
 
     <div class="update">
-      数据来源：多个游戏攻略网站综合整理 | 版本可能随更新变化
+      数据来源：datatft.com及多个游戏攻略网站综合整理<br>
+      S17赛季 · 版本可能随更新变化
     </div>
   </div>
 
   <!-- 弹窗 -->
-  <div id="modal" class="modal" onclick="document.getElementById('modal').classList.remove('show')">
+  <div id="modal" class="modal" onclick="closeModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
       <div id="modal-body"></div>
-      <button class="close-btn" onclick="document.getElementById('modal').classList.remove('show')">关闭</button>
+      <button class="close-btn" onclick="closeModal()">关闭</button>
     </div>
   </div>
 
   <script>
     const data = {
-      assassin: {
+      kasha: {
         name: '暗星卡莎',
         tier: 'T0',
-        desc: '当前版本公认最强阵容',
+        desc: '版本答案 · 当前版本公认最强',
         champions: '卡莎、烬、塔姆、努努、莫甘娜、卡尔玛、铁男、大虫子、丽桑卓',
-        items: '卡莎：无尽+青龙刀+锐利之刃<br>烬：羊刀+无尽+锐利之刃<br>塔姆：日炎+薄暮法袍+狂徒',
-        strat: '7级卡利息追三星卡莎 → 升8级开6暗星锁血<br>星神推荐：韦鲁斯（复制器加速追三）/ 亚索（强化格增伤）',
+        items: '卡莎：无尽之刃 + 青龙刀 + 锐利之刃<br>烬：羊刀 + 无尽 + 锐利之刃<br>塔姆：日炎 + 薄暮法袍 + 狂徒',
+        strat: '开局连败存钱 → 3-5/4-1升7大D找二星卡莎<br>7级卡利息慢D三星卡莎 → 升8开6暗星锁血<br>选神：优先韦鲁斯（追三星）',
         counter: '被高爆发法系阵容克制'
-      },
-      star: {
-        name: '新星九五',
-        tier: 'T0',
-        desc: '运营天花板，成型后近乎无解',
-        champions: '男枪、剑姬、莫甘娜、薇古丝、慎、塔姆、阿卡丽、剑魔、娑娜',
-        items: '剑姬：无尽+饮血+复活甲<br>莫甘娜：青龙刀+法爆+鬼书',
-        strat: '9人口成型，经济运营要求高<br>前期连胜攒经济，快速升9',
-        counter: '被快节奏赌狗阵容克制'
       },
       sniper: {
         name: '观星九五狙',
         tier: 'T0',
-        desc: '公式化上分，稳定吃鸡',
+        desc: '后期之王 · 公式化运营',
         champions: '霞、烬、努努、拉莫斯、卡尔玛、慎、贾克斯、巴德、机器人',
-        items: '霞：羊刀+双海妖<br>烬：无尽+杀人剑+轻语<br>努努：冕卫+冰甲+狂徒',
-        strat: '前期连胜过渡<br>中期补3观星+3狙神<br>后期升9补齐阵容',
+        items: '霞：羊刀 + 双海妖（或海妖+无尽）<br>烬：无尽 + 杀人剑 + 轻语<br>努努：冕卫 + 冰甲 + 狂徒',
+        strat: '前期用3观星过渡 → 4-2升8搜锐雯+霞<br>霞2星后存钱上9 → 补烬和巴德大成<br>选神：阿狸（经济运营）',
         counter: '被刺客阵容克制'
-      },
-      lb: {
-        name: '重装妖姬',
-        tier: 'T0',
-        desc: '三费赌狗版本答案',
-        champions: '妖姬、努努、卡尔玛、俄洛伊、机器人、娑娜、小木灵、莫甘娜',
-        items: '妖姬：羊刀+法爆+巨杀<br>努努：离子火花+日炎+狂徒',
-        strat: '7级慢D三星妖姬 → 上8开6重装',
-        counter: '被高爆发AOE阵容克制'
       },
       veigar: {
         name: '木灵小法',
         tier: 'T0',
-        desc: '7木灵复制快速追三',
+        desc: '赌狗快乐阵 · 7木灵复制追三',
         champions: '小法、库奇、拉莫斯、波比、巴德、卡尔玛、菲兹、小木灵、丽桑卓',
-        items: '小法：蓝霸符+法爆+科技枪',
-        strat: '利用7木灵复制快速追三星小法<br>小法为核心输出',
+        items: '小法：纳什之牙 + 法爆 + 青龙刀<br>飞机：轻语 + 杀人剑 + 破防者<br>拉莫斯：日炎 + 反甲 + 离子火花',
+        strat: '前期不搜牌 → 8人口搜7木灵<br>利用木灵复制快速三星小法 → 上9补强<br>选神：韦鲁斯（妮蔻追三星）',
         counter: '被重装阵容克制'
       },
-      berzerk: {
-        name: '狂战特工',
-        tier: 'T1',
-        desc: '物理爆发，中期强势',
-        champions: '易、加里奥、千珏、娑娜、厄加特',
-        items: '易：羊刀+无尽+水银<br>厄加特：饮血+泰坦+复活甲',
-        strat: '中期爆发强<br>适合前中期快速抬人',
-        counter: '后期乏力，需尽快结束'
-      },
-      huan: {
-        name: '幻灵九五',
-        tier: 'T1',
-        desc: '幻灵体系，后期转型灵活',
-        champions: '菲奥娜、阿罗拉、俄洛伊',
-        items: '菲奥娜：无尽+饮血+泰坦',
-        strat: '前期用幻灵过渡<br>后期看情况转型',
-        counter: '成型较慢'
-      },
-      nami: {
-        name: '太空娜美',
-        tier: 'T1',
-        desc: '控制+爆发兼备',
-        champions: '娜美、奥恩、烬、莎弥拉',
-        items: '娜美：蓝霸符+法爆+鬼书<br>烬：无尽+轻语',
-        strat: '控制链充足<br>配合后排输出',
+      dragon: {
+        name: '重装龙王',
+        tier: 'T0',
+        desc: '17.3版本龙王史诗级加强 · 伤害翻倍',
+        champions: '龙王、努努、机器人、巴德、卡尔玛、琴女、俄洛伊、小木灵、铁男',
+        items: '龙王：帽子 + 法爆 + 破防者<br>努努：冰甲 + 狂徒 + 头盔<br>机器人：正义 + 法爆 + 冕卫',
+        strat: '前期3海魔或3未来过渡 → 4-1上8大D<br>5费全2后上9<br>选神：阿狸/艾克',
         counter: '被刺客切入克制'
+      },
+      star95: {
+        name: '新星九五',
+        tier: 'T0',
+        desc: '运营天花板 · 成型后近乎无解',
+        champions: '男枪、剑姬、莫甘娜、薇古丝、努努、慎、布里茨、塔姆、阿卡丽、剑魔',
+        items: '男枪：水银 + 夜刃 + 破防者<br>剑姬：羊刀 + 夜刃 + 正义<br>薇古丝：羊刀 + 红buff + 破防者',
+        strat: '8级小D一张塔姆 → 9级D全阵容<br>血量健康直接上10<br>选神：阿狸（经济优先）',
+        counter: '被快节奏赌狗阵容克制'
+      },
+      weigu: {
+        name: '木灵薇古丝95',
+        tier: 'T1',
+        desc: '法系天花板 · 双巨杀薇古丝',
+        champions: '薇古丝、机器人、拉莫斯、超级机甲、慎、巴德、卡尔玛、小木灵、铁男',
+        items: '薇古丝：羊刀 + 巨杀 + 巨杀（双巨杀）<br>机器人：法爆 + 正义 + 离子<br>拉莫斯：板甲 + 振奋 + 狂徒',
+        strat: '前期3未来或3海魔过渡 → 4-1拉8抽全四费<br>5阶段上9打干，每波D牌到全2星<br>选神：艾克（迅捷蟹）/ 阿狸',
+        counter: '被刺客克制'
+      },
+      lb: {
+        name: '重装妖姬',
+        tier: 'T1',
+        desc: '三费赌狗版本答案',
+        champions: '妖姬、努努、卡尔玛、俄洛伊、机器人、娑娜、小木灵、莫甘娜',
+        items: '妖姬：羊刀 + 法爆 + 巨杀<br>努努：离子火花 + 日炎 + 狂徒<br>机器人：冕卫 + 正义 + 法爆',
+        strat: '7级慢D三星妖姬 → 上8开6重装<br>选神：韦鲁斯（加速追三）',
+        counter: '被高爆发AOE阵容克制'
       }
     };
 
@@ -325,7 +345,7 @@
       event.target.classList.add('active');
     }
 
-    function showRank(id) {
+    function showDetail(id) {
       const d = data[id];
       document.getElementById('modal-body').innerHTML = `
         <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
@@ -345,24 +365,8 @@
       document.getElementById('modal').classList.add('show');
     }
 
-    function showResearch(id) {
-      const d = data[id];
-      document.getElementById('modal-body').innerHTML = `
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
-          <span class="tier ${d.tier === 'T0' ? 't0' : 't1'}">${d.tier}</span>
-          <span style="font-size:18px;font-weight:bold;">${d.name}</span>
-        </div>
-        <div style="font-size:13px;color:#666;margin-bottom:12px;">${d.desc}</div>
-        <div class="section-title">阵容成员</div>
-        <div>${d.champions.split('、').map(c => `<span class="tag">${c}</span>`).join('')}</div>
-        <div class="section-title">装备推荐</div>
-        <div style="font-size:13px;color:#555;line-height:1.8;">${d.items}</div>
-        <div class="section-title">运营思路</div>
-        <div style="font-size:13px;color:#555;line-height:1.8;">${d.strat}</div>
-        <div class="section-title">克制关系</div>
-        <div style="font-size:13px;color:#555;">${d.counter}</div>
-      `;
-      document.getElementById('modal').classList.add('show');
+    function closeModal() {
+      document.getElementById('modal').classList.remove('show');
     }
   </script>
 </body>
