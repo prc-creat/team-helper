@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>金铲铲阵容助手</title>
+  <title>金铲铲阵容助手 - S17</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
@@ -25,14 +25,15 @@
       display: flex;
       background: white;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      position: sticky; top: 0; z-index: 10;
     }
     .nav button {
       flex: 1;
-      padding: 15px;
+      padding: 14px 8px;
       border: none;
       background: white;
       color: #666;
-      font-size: 14px;
+      font-size: 13px;
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -41,7 +42,7 @@
       color: white;
     }
     .content {
-      padding: 20px;
+      padding: 16px;
       max-width: 600px;
       margin: 0 auto;
     }
@@ -51,88 +52,317 @@
       padding: 16px;
       margin-bottom: 12px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      cursor: pointer;
+      transition: transform 0.2s;
     }
-    .card h3 { font-size: 16px; margin-bottom: 8px; }
-    .card p { font-size: 13px; color: #666; line-height: 1.6; }
+    .card:active { transform: scale(0.98); }
+    .card h3 { font-size: 15px; margin-bottom: 6px; }
+    .card p { font-size: 13px; color: #666; line-height: 1.5; }
     .tier {
       display: inline-block;
       padding: 2px 8px;
       border-radius: 4px;
       color: white;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: bold;
       margin-right: 6px;
+      vertical-align: middle;
     }
     .t0 { background: #e74c3c; }
     .t1 { background: #f39c12; }
     .t2 { background: #3498db; }
     .tag {
       display: inline-block;
-      background: #F0F8FF;
-      padding: 4px 10px;
-      border-radius: 12px;
-      font-size: 12px;
-      margin: 3px;
+      background: #E8F4FD;
+      padding: 3px 8px;
+      border-radius: 10px;
+      font-size: 11px;
+      margin: 2px 3px 2px 0;
+      color: #555;
+    }
+    .section-title {
+      color: #87CEEB;
+      font-size: 13px;
+      font-weight: bold;
+      margin: 10px 0 6px;
+    }
+    .gear-item {
+      padding: 3px 0;
+      font-size: 13px;
+      color: #555;
+    }
+    .gear-item::before { content: '✦ '; color: #87CEEB; }
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+    .modal.show { display: flex; }
+    .modal-content {
+      background: white;
+      border-radius: 16px;
+      padding: 24px;
+      margin: 20px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+    .close-btn {
+      width: 100%;
+      padding: 12px;
+      background: #87CEEB;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 16px;
     }
     .update {
       text-align: center;
       color: #999;
-      font-size: 12px;
-      padding: 20px;
+      font-size: 11px;
+      padding: 16px;
     }
   </style>
 </head>
 <body>
   <div class="header">
     <h1>🏅 金铲铲阵容助手</h1>
-    <p>S17赛季 · 数据整理中</p>
+    <p>S17星神赛季</p>
   </div>
 
   <div class="nav">
     <button class="active" onclick="showTab('rank')">🏅 阵容强度</button>
     <button onclick="showTab('research')">📚 阵容科研</button>
-    <button onclick="showTab('gear')">🛡️ 装备推荐</button>
+    <button onclick="showTab('gear')">🛡️ 单卡评级</button>
   </div>
 
   <div class="content">
+    <!-- 阵容强度 -->
     <div id="tab-rank" class="tab-content">
-      <div class="card">
-        <h3><span class="tier t0">T0</span> 等待数据更新</h3>
-        <p>S17赛季阵容强度数据正在收集中，敬请期待</p>
+      <p style="font-size:12px;color:#999;margin-bottom:8px;">点击阵容查看详情</p>
+
+      <div class="card" onclick="showRank('assassin')">
+        <h3><span class="tier t0">T0</span> 暗星卡莎</h3>
+        <p>核心：卡莎、烬、塔姆、努努、莫甘娜、卡尔玛、铁男、大虫子、丽桑卓</p>
       </div>
-      <div class="card">
-        <h3><span class="tier t1">T1</span> 等待数据更新</h3>
-        <p></p>
+      <div class="card" onclick="showRank('star')">
+        <h3><span class="tier t0">T0</span> 新星九五</h3>
+        <p>核心：男枪、剑姬、莫甘娜、薇古丝、慎、塔姆、阿卡丽、剑魔、娑娜</p>
       </div>
-      <div class="card">
-        <h3><span class="tier t2">T2</span> 等待数据更新</h3>
-        <p></p>
+      <div class="card" onclick="showRank('sniper')">
+        <h3><span class="tier t0">T0</span> 观星九五狙</h3>
+        <p>核心：霞、烬、努努、拉莫斯、卡尔玛、慎、贾克斯、巴德、机器人</p>
+      </div>
+      <div class="card" onclick="showRank('lb')">
+        <h3><span class="tier t0">T0</span> 重装妖姬</h3>
+        <p>核心：妖姬、努努、卡尔玛、俄洛伊、机器人、娑娜、小木灵、莫甘娜</p>
+      </div>
+      <div class="card" onclick="showRank('veigar')">
+        <h3><span class="tier t0">T0</span> 木灵小法</h3>
+        <p>核心：小法、库奇、拉莫斯、波比、巴德、卡尔玛、菲兹、小木灵、丽桑卓</p>
+      </div>
+
+      <p style="font-size:13px;color:#87CEEB;font-weight:bold;margin:16px 0 8px;">T1 稳定吃分</p>
+      <div class="card" onclick="showRank('berzerk')">
+        <h3><span class="tier t1">T1</span> 狂战特工</h3>
+        <p>核心：易、加里奥、千珏、娑娜、厄加特｜物理爆发，中期强势</p>
+      </div>
+      <div class="card" onclick="showRank('huan')">
+        <h3><span class="tier t1">T1</span> 幻灵九五</h3>
+        <p>核心：菲奥娜、阿罗拉、俄洛伊｜幻灵体系，后期转型灵活</p>
+      </div>
+      <div class="card" onclick="showRank('nami')">
+        <h3><span class="tier t1">T1</span> 太空娜美</h3>
+        <p>核心：娜美、奥恩、烬、莎弥拉｜控制+爆发兼备</p>
       </div>
     </div>
 
+    <!-- 阵容科研 -->
     <div id="tab-research" class="tab-content" style="display:none">
-      <div class="card">
-        <h3>攻略整理中</h3>
-        <p>S17赛季阵容科研攻略正在收集中</p>
+      <p style="font-size:12px;color:#999;margin-bottom:8px;">点击查看详细攻略</p>
+      <div class="card" onclick="showResearch('assassin')">
+        <h3><span class="tier t0">T0</span> 暗星卡莎</h3>
+        <p>版本答案，7级追三卡莎锁血</p>
+      </div>
+      <div class="card" onclick="showResearch('lb')">
+        <h3><span class="tier t0">T0</span> 重装妖姬</h3>
+        <p>三费赌狗版本答案，7级慢D三星妖姬</p>
+      </div>
+      <div class="card" onclick="showResearch('sniper')">
+        <h3><span class="tier t0">T0</span> 观星九五狙</h3>
+        <p>公式化上分，冷门稳定</p>
       </div>
     </div>
 
+    <!-- 单卡评级 -->
     <div id="tab-gear" class="tab-content" style="display:none">
+      <p style="font-size:12px;color:#999;margin-bottom:8px;">S17赛季英雄强度评级</p>
+      <p style="font-size:13px;color:#e74c3c;font-weight:bold;margin-bottom:6px;">三费卡</p>
       <div class="card">
-        <h3>装备数据整理中</h3>
-        <p>S17赛季装备推荐数据正在收集中</p>
+        <h3><span class="tier t0">T0</span> 阿萝拉、卡莎、厄加特</h3>
+      </div>
+      <div class="card">
+        <h3><span class="tier t1">T1</span> 奥恩、俄洛伊、茂凯、拉亚斯特、莎弥拉、璐璐</h3>
+      </div>
+
+      <p style="font-size:13px;color:#f39c12;font-weight:bold;margin:12px 0 6px;">四费卡</p>
+      <div class="card">
+        <h3><span class="tier t0">T0</span> 加里奥、塔姆、霞</h3>
+      </div>
+      <div class="card">
+        <h3><span class="tier t1">T1</span> 索尔、库奇、乐芙兰、努努、锐雯、千珏</h3>
+      </div>
+
+      <p style="font-size:13px;color:#9b59b6;font-weight:bold;margin:12px 0 6px;">五费卡</p>
+      <div class="card">
+        <h3><span class="tier t0">T0</span> 劫（天煞）、菲奥娜（剑姬）、薇古丝</h3>
+      </div>
+      <div class="card">
+        <h3><span class="tier t1">T1</span> 烬、娑娜、巴德、莫甘娜、慎</h3>
       </div>
     </div>
 
-    <div class="update">数据来源：收集中</div>
+    <div class="update">
+      数据来源：多个游戏攻略网站综合整理 | 版本可能随更新变化
+    </div>
+  </div>
+
+  <!-- 弹窗 -->
+  <div id="modal" class="modal" onclick="document.getElementById('modal').classList.remove('show')">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <div id="modal-body"></div>
+      <button class="close-btn" onclick="document.getElementById('modal').classList.remove('show')">关闭</button>
+    </div>
   </div>
 
   <script>
+    const data = {
+      assassin: {
+        name: '暗星卡莎',
+        tier: 'T0',
+        desc: '当前版本公认最强阵容',
+        champions: '卡莎、烬、塔姆、努努、莫甘娜、卡尔玛、铁男、大虫子、丽桑卓',
+        items: '卡莎：无尽+青龙刀+锐利之刃<br>烬：羊刀+无尽+锐利之刃<br>塔姆：日炎+薄暮法袍+狂徒',
+        strat: '7级卡利息追三星卡莎 → 升8级开6暗星锁血<br>星神推荐：韦鲁斯（复制器加速追三）/ 亚索（强化格增伤）',
+        counter: '被高爆发法系阵容克制'
+      },
+      star: {
+        name: '新星九五',
+        tier: 'T0',
+        desc: '运营天花板，成型后近乎无解',
+        champions: '男枪、剑姬、莫甘娜、薇古丝、慎、塔姆、阿卡丽、剑魔、娑娜',
+        items: '剑姬：无尽+饮血+复活甲<br>莫甘娜：青龙刀+法爆+鬼书',
+        strat: '9人口成型，经济运营要求高<br>前期连胜攒经济，快速升9',
+        counter: '被快节奏赌狗阵容克制'
+      },
+      sniper: {
+        name: '观星九五狙',
+        tier: 'T0',
+        desc: '公式化上分，稳定吃鸡',
+        champions: '霞、烬、努努、拉莫斯、卡尔玛、慎、贾克斯、巴德、机器人',
+        items: '霞：羊刀+双海妖<br>烬：无尽+杀人剑+轻语<br>努努：冕卫+冰甲+狂徒',
+        strat: '前期连胜过渡<br>中期补3观星+3狙神<br>后期升9补齐阵容',
+        counter: '被刺客阵容克制'
+      },
+      lb: {
+        name: '重装妖姬',
+        tier: 'T0',
+        desc: '三费赌狗版本答案',
+        champions: '妖姬、努努、卡尔玛、俄洛伊、机器人、娑娜、小木灵、莫甘娜',
+        items: '妖姬：羊刀+法爆+巨杀<br>努努：离子火花+日炎+狂徒',
+        strat: '7级慢D三星妖姬 → 上8开6重装',
+        counter: '被高爆发AOE阵容克制'
+      },
+      veigar: {
+        name: '木灵小法',
+        tier: 'T0',
+        desc: '7木灵复制快速追三',
+        champions: '小法、库奇、拉莫斯、波比、巴德、卡尔玛、菲兹、小木灵、丽桑卓',
+        items: '小法：蓝霸符+法爆+科技枪',
+        strat: '利用7木灵复制快速追三星小法<br>小法为核心输出',
+        counter: '被重装阵容克制'
+      },
+      berzerk: {
+        name: '狂战特工',
+        tier: 'T1',
+        desc: '物理爆发，中期强势',
+        champions: '易、加里奥、千珏、娑娜、厄加特',
+        items: '易：羊刀+无尽+水银<br>厄加特：饮血+泰坦+复活甲',
+        strat: '中期爆发强<br>适合前中期快速抬人',
+        counter: '后期乏力，需尽快结束'
+      },
+      huan: {
+        name: '幻灵九五',
+        tier: 'T1',
+        desc: '幻灵体系，后期转型灵活',
+        champions: '菲奥娜、阿罗拉、俄洛伊',
+        items: '菲奥娜：无尽+饮血+泰坦',
+        strat: '前期用幻灵过渡<br>后期看情况转型',
+        counter: '成型较慢'
+      },
+      nami: {
+        name: '太空娜美',
+        tier: 'T1',
+        desc: '控制+爆发兼备',
+        champions: '娜美、奥恩、烬、莎弥拉',
+        items: '娜美：蓝霸符+法爆+鬼书<br>烬：无尽+轻语',
+        strat: '控制链充足<br>配合后排输出',
+        counter: '被刺客切入克制'
+      }
+    };
+
     function showTab(tab) {
       document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
       document.querySelectorAll('.nav button').forEach(el => el.classList.remove('active'));
       document.getElementById('tab-' + tab).style.display = 'block';
       event.target.classList.add('active');
+    }
+
+    function showRank(id) {
+      const d = data[id];
+      document.getElementById('modal-body').innerHTML = `
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <span class="tier ${d.tier === 'T0' ? 't0' : 't1'}">${d.tier}</span>
+          <span style="font-size:18px;font-weight:bold;">${d.name}</span>
+        </div>
+        <p style="font-size:13px;color:#666;margin-bottom:12px;">${d.desc}</p>
+        <div class="section-title">阵容成员</div>
+        <div>${d.champions.split('、').map(c => `<span class="tag">${c}</span>`).join('')}</div>
+        <div class="section-title">装备推荐</div>
+        <div style="font-size:13px;color:#555;line-height:1.8;">${d.items}</div>
+        <div class="section-title">运营思路</div>
+        <div style="font-size:13px;color:#555;line-height:1.8;">${d.strat}</div>
+        <div class="section-title">克制关系</div>
+        <div style="font-size:13px;color:#555;">${d.counter}</div>
+      `;
+      document.getElementById('modal').classList.add('show');
+    }
+
+    function showResearch(id) {
+      const d = data[id];
+      document.getElementById('modal-body').innerHTML = `
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <span class="tier ${d.tier === 'T0' ? 't0' : 't1'}">${d.tier}</span>
+          <span style="font-size:18px;font-weight:bold;">${d.name}</span>
+        </div>
+        <div style="font-size:13px;color:#666;margin-bottom:12px;">${d.desc}</div>
+        <div class="section-title">阵容成员</div>
+        <div>${d.champions.split('、').map(c => `<span class="tag">${c}</span>`).join('')}</div>
+        <div class="section-title">装备推荐</div>
+        <div style="font-size:13px;color:#555;line-height:1.8;">${d.items}</div>
+        <div class="section-title">运营思路</div>
+        <div style="font-size:13px;color:#555;line-height:1.8;">${d.strat}</div>
+        <div class="section-title">克制关系</div>
+        <div style="font-size:13px;color:#555;">${d.counter}</div>
+      `;
+      document.getElementById('modal').classList.add('show');
     }
   </script>
 </body>
